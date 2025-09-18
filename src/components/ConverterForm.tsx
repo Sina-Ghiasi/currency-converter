@@ -42,7 +42,9 @@ export function ConverterForm({
           <input
             className="input w-full"
             type="number"
+            min={0}
             value={baseAmount}
+            title={baseAmount.toLocaleString()}
             onChange={(e) => onBaseAmountChange(e.target.valueAsNumber)}
           />
         </div>
@@ -62,22 +64,34 @@ export function ConverterForm({
           <input
             className="input w-full"
             type="number"
+            min={0}
             value={targetAmount}
+            title={targetAmount.toLocaleString()}
             onChange={(e) => onTargetAmountChange(e.target.valueAsNumber)}
           />
         </div>
       </div>
 
-      <div className="flex justify-center my-4">
-        <button className="btn" onClick={onSwap}>
+      <div className="min-h-[1.25rem] mt-1">
+        {baseCurrency === targetCurrency && (
+          <p className="text-sm text-gray-500">
+            هر دو ارز یکسان هستند، مقدار تغییر نمی‌کند.
+          </p>
+        )}
+      </div>
+
+      <div className="flex justify-center my-3">
+        <button className="btn btn-outline btn-block" onClick={onSwap}>
           <ArrowLeftRight className="w-5 h-5" />
         </button>
       </div>
 
       <div className="text-center">
+        محاسبات بر اساس نرخ‌های&nbsp;
         <Link to="/settings" className="link link-primary link-hover">
-          رفتن به تنظیمات
+          تنظیم شده
         </Link>
+        &nbsp;انجام می‌شود.
       </div>
     </div>
   );
