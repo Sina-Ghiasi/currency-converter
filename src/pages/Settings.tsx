@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { loadExchangeRates, saveExchangeRates } from "../lib/currency";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Settings() {
   const [exchangeRates, setExchangeRates] = useState(loadExchangeRates());
@@ -15,7 +16,7 @@ export default function Settings() {
 
   const handleSave = () => {
     saveExchangeRates(exchangeRates);
-    alert("نرخ تبدیل ها با موفقیت ذخیره شد!");
+    toast.success("نرخ تبدیل‌ها با موفقیت ذخیره شد!");
     navigate("/");
   };
 

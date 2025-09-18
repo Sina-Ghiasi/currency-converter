@@ -86,8 +86,8 @@ export function ConverterForm({
         </button>
       </div>
 
-      <div className="text-center">
-        محاسبات بر اساس نرخ‌های&nbsp;
+      <div className="text-center text-sm md:text-base">
+        محاسبات بر اساس نرخ‌ های&nbsp;
         <Link to="/settings" className="link link-primary link-hover">
           تنظیم شده
         </Link>
