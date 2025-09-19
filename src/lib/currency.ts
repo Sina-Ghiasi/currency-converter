@@ -1,6 +1,7 @@
+import toast from "react-hot-toast";
 import type { ExchangeRates } from "../types/currency";
 
-const DEFAULT_RATES: Record<string, number> = {
+const DEFAULT_RATES: ExchangeRates = {
   USD: 1, // base currency
   IRR: 1000000, // 1 USD = 1,000,000 IRR
   EUR: 0.85, // 1 USD = 0.85 EUR
@@ -10,8 +11,11 @@ export function loadExchangeRates(): ExchangeRates {
   try {
     const stored = localStorage.getItem("ExchangeRates");
     return stored ? JSON.parse(stored) : DEFAULT_RATES;
-  } catch {
-    // TODO: Needs additional error handling
+  } catch (error) {
+    console.error("Failed to load exchange rates:", error);
+    toast("نرخ‌ ها بارگذاری نشد. مقادیر پیش‌ فرض استفاده شدند.", {
+      icon: "⚠️",
+    });
     return DEFAULT_RATES;
   }
 }
@@ -19,8 +23,12 @@ export function loadExchangeRates(): ExchangeRates {
 export function saveExchangeRates(rates: ExchangeRates) {
   try {
     localStorage.setItem("ExchangeRates", JSON.stringify(rates));
-  } catch {
-    // TODO: Needs additional error handling
+  } catch (error) {
+    console.error("Failed to save exchange rates:", error);
+    throw new Error(
+      "Unable to save exchange rates. " +
+        (error instanceof Error ? error.message : "")
+    );
   }
 }
 

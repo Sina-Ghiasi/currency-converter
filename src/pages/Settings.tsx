@@ -15,9 +15,13 @@ export default function Settings() {
   const handleCancel = () => navigate("/");
 
   const handleSave = () => {
-    saveExchangeRates(exchangeRates);
-    toast.success("نرخ تبدیل‌ها با موفقیت ذخیره شد!");
-    navigate("/");
+    try {
+      saveExchangeRates(exchangeRates);
+      toast.success("نرخ تبدیل‌ها با موفقیت ذخیره شد!");
+      navigate("/");
+    } catch {
+      toast.error("ذخیره نرخ‌ها موفقیت‌آمیز نبود. لطفاً دوباره تلاش کنید.");
+    }
   };
 
   return (
